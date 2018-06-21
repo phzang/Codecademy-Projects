@@ -11,6 +11,11 @@
 
 
 
+name = input("What is your name? ")
+
+print(name)
+
+
 
 
 # Cool! We have the initial skeleton done, now we have to define `new_customer()` and `existing_customer()`.By breaking up our bot into a bunch of smaller functions we can build each piece incrementally and check our progress as we slowly build a fully functioning product.
@@ -28,8 +33,7 @@ def existing_customer():
     print("""What kind of support do you need?
           [1] Television Support
           [2] Internet Support
-          [3] Speak to a support representative.
-          [0] Quit""")
+          [3] Speak to a support representative. """)
           
     response = int(input("Please enter the number corresponding to your choice: "))
     print()
@@ -40,9 +44,6 @@ def existing_customer():
           internet_support()
     elif (response == 3):
           live_rep("support")
-    elif (response == 0):
-          print("Take care!")
-          quit()
     else:
           print("Sorry, we didn't understand your selection.")
           existing_customer()   
@@ -60,8 +61,7 @@ def new_customer():
     print("""We're excited to have you join the DNS family, how can we help you?
         [1] Sign up for service.
         [2] Schedule a home visit.
-        [3] Speak to a sales representative.
-        [0] Quit""")
+        [3] Speak to a sales representative. """)
     
     response = int(input("Please enter the number corresponding to your choice: "))
     print()
@@ -70,11 +70,8 @@ def new_customer():
         sign_up()
     elif (response == 2):
         home_visit()
-    elif (response == 3 ):
+    elif (response ==3 ):
         live_rep("sales")
-    elif (response == 0):
-        print("Take care!")
-        quit()
     else:
         print("Sorry, we didn't understand your selection.")
           
@@ -98,8 +95,7 @@ def television_support():
         [1] I can't access certain channels.
         [2] My picture is blurry.
         [3] I keep losing service.
-        [4] Other issues.
-        [0] Quit""")
+        [4] Other issues.""")
     
     response = int(input("Please enter the number corresponding to your choice: "))
     print()
@@ -115,9 +111,6 @@ def television_support():
         did_that_help()
     elif(response == 4):
         live_rep("support")
-    elif (response == 0):
-        print("Take care!")
-        quit()
     else:
         print("Sorry, we didn't understand your selection.")
           
@@ -136,8 +129,7 @@ def internet_support():
     print("""[1] I can't connect to the internet.
             [2] My connection is very slow.
             [3] I can't access certain sites.
-            [4] Other Issues.
-            [0] Quit""")
+            [4] Other Issues.""")
     
     response = int(input("Please enter the number corresponding to your choice: "))
     print()
@@ -153,9 +145,6 @@ def internet_support():
         did_that_help()
     elif(response == 4):
         live_rep("support")
-    elif (response == 0):
-        print("Take care!")
-        quit()
     else:
         print("Sorry, we didn't understand your selection.")
         internet_support()   
@@ -173,7 +162,8 @@ def internet_support():
 
 
 def did_that_help():
-    response = input("Did that fix your problem? (Y/N)" )
+    print("Did that fix your problem? (Y/N)")
+    response = input()
     print()
     
     if (response == "Y"): 
@@ -181,17 +171,13 @@ def did_that_help():
     elif(response == "N"):
         print("""Would you like to talke to
               [1] Talk to a live representative
-              [2] Schedule a home visit
-              [0] Quit""")
+              [2] Schedule a home visit""")
         response_2 = int(input("Please enter the number corresponding to your choice: "))
         
         if (response_2 == 1):
             live_rep("support")
         elif (response_2 == 2): 
             home_visit("support")
-        elif (response == 0):
-            print("Take care!")
-            quit()
         else:
             print("Sorry, we didn't understand your selection.")
             did_that_help()       
@@ -213,8 +199,7 @@ def sign_up():
     print("""Great choice, friend! We're excited to have you join the DNS family! Please select the package you are interested in signing up for.
             [1] Bundle Deal (Internet + Cable)
             [2] Internet
-            [3] Cable
-            [0] Quit""")
+            [3] Cable""")
     
     selection = int(input("Please enter the number corresponding to your choice: "))
     print()
@@ -230,10 +215,7 @@ def sign_up():
     elif (selection == 3):
         print("You've selected the Cable Only Package! Please schedule a home visit and our technician will come and set up your new service.")
         home_visit("new_install")
-
-    elif (response == 0):
-        print("Take care!")
-        quit()
+        
     else:
         print("Sorry, we didn't understand your selection.")
         sign_up()
@@ -263,8 +245,7 @@ def home_visit(purpose = "none"):
         print("""What is the purpose of your home visit?
             [1] New service installation.
             [2] Exisitng service repair.
-            [3] Location scouting for unserviced region.
-            [0] Quit""")
+            [3] Location scouting for unserviced region.""")
         
         selection = int(input("Please enter the number corresponding to your choice: "))
         print()
@@ -275,27 +256,12 @@ def home_visit(purpose = "none"):
             home_visit("support")
         elif (selection == 3):
             home_visit("scout")
-        elif (response == 0):
-            print("Take care!")
-            quit()
         else:
             print("Please enter a date below when you are available for a technician to come to your home and [PURPOSE SPECIFC TEXT HERE].")
             visit_date = input()
             
             print("Wonderful! A technical will come visit you on [visit_date]. Please be available between the hours of 1:00 am and 11:00 pm.")
             return visit_date
-
-    if (purpose == "new_install"):
-        visit_date = input("Please enter a date below when you are available for a technician to come to your home and install your service. ")
-        print("Wonderful! A technical will come visit you on {}. Please be available between the hours of 1:00 am and 11:00 pm.".format(visit_date))
-        
-    if (purpose == "support"):
-        visit_date = input("Please enter a date below when you are available for a technician to come to your home for your repair. ")
-        print("Wonderful! A technical will come visit you on {}. Please be available between the hours of 1:00 am and 11:00 pm.".format(visit_date))
-        
-    if (purpose == "scout"):
-        visit_date = input("Please enter a date below when you are available for a technician to come to your location for scouting service. ")
-        print("Wonderful! A technical will come visit you on {}. Please be available between the hours of 1:00 am and 11:00 pm.".format(visit_date))
 	
     
         
@@ -325,12 +291,11 @@ def live_rep(purpose):
 # 
 
 
-
-def cs_service_bot(named):
+def cs_service_bot():
     # Replace `pass` with your code
-    print("""Hello {}! Welcome to the DNS Cable Company's Service Portal. Are you a new or existing customer?
+    print("""Hello! Welcome to the DNS Cable Company's Service Portal. Are you a new or existing customer?
           [1] New Customer
-          [2] Existing Customer""".format(named))
+          [2] Existing Customer""")
     
     response = int(input("Please enter the number corresponding to your choice: "))
     print()
@@ -343,7 +308,7 @@ def cs_service_bot(named):
         return cs_service_bot()   
 	
     
-name = input("What is your name? ")
-cs_service_bot(name)
+
+cs_service_bot()
 
 
