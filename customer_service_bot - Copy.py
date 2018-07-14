@@ -18,7 +18,6 @@ print(name)
 
 
 
-# Cool! We have the initial skeleton done, now we have to define `new_customer()` and `existing_customer()`.By breaking up our bot into a bunch of smaller functions we can build each piece incrementally and check our progress as we slowly build a fully functioning product.
 # 
 # ## Step 3
 # Let's start with `existing_customer()`. The options **DNS Cable Company** wants users to be able to select are 

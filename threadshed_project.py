@@ -1,3 +1,8 @@
+"""All day, for each transaction, the name of the customer,
+amount spent, types of thread purchased, and the date of sale is
+all recorded in this same string. """
+
+
 daily_sales = \
 """Edith Mcbride   ;,;$1.21   ;,;   white ;,; 
 09/15/17   ,Herbert Tran   ;,;   $7.29;,; 
