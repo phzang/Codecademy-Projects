@@ -106,21 +106,16 @@ green&white;,;09/15/17,   Gail Phelps   ;,;$30.52
 ;,;   $22.66   ;,; green&white&blue;,;09/15/17"""
 
 #------------------------------------------------
-# Start coding below!
-
 # Transactions are separated by ,
 # Data is separated by ;,;
 # Replace ;,; to something that's does not have a comma !
 
 daily_sales_replaced = daily_sales.replace(";,;","!")
 
-#print(daily_sales_replaced)
 #split to individual transactions
 
 daily_transactions = daily_sales_replaced.split(",")
 
-
-#print(daily_transactions)
 
 daily_transaction_split = []
 
@@ -128,7 +123,6 @@ daily_transaction_split = []
 for d in daily_transactions:    
     daily_transaction_split.append(d.split("!"))
                                    
-#print(daily_transaction_split[0][0])
 
 '''Now, Iterate through daily_transaction_split and for each transaction iterate
 through the different data points and strip off any whitespace.
@@ -145,8 +139,6 @@ for daily in daily_transaction_split:
     transactions_clean.append(tmp)
      
 
-#print(transactions_clean[0])
-
 customers = []
 sales = []
 thread_sold = []
@@ -156,15 +148,10 @@ for c,s,t,d in transactions_clean:
     sales.append(s)
     thread_sold.append(t)
 
-#print(customers)
-
 total_sales = 0
-#print(sales)
 
 for s in sales:
     total_sales += float(s.strip('$'))
-
-#print(total_sales)
 
 print(thread_sold)
 
@@ -201,31 +188,4 @@ were sold today""".format(color_count('red'),color_count('yellow'),color_count('
       
 
 
-# Write your substring_between_letters function here:
-def substring_between_letters(word,start,end):
-    s = word.find(start)
-    e = word.find(end)
-    print(s)
-    if s == -1 or e == -1:
-        return word  
-    
-    return word[int(s):int(e)]
 
-# Uncomment these function calls to test your function:
-#print(substring_between_letters("apple", "p", "e"))
-# should print "pl"
-#print(substring_between_letters("apple", "p", "c"))
-# should print "apple"
-print("------------------------")
-# Write your x_length_words function here:
-def x_length_words(sentence,x):
-    words = sentence.split(' ')
-    for w in words:
-        print(w)
-        print(len(w))
-        if len(w) < x:
-            return False
-  
-    return True
-
-print(x_length_words("he likes apples", 2))
