@@ -1,0 +1,1 @@
+Place to store Coding Challenges from Codecademy.com
