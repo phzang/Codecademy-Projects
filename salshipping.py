@@ -70,9 +70,3 @@ def Sal_Shipping(weight):
 user_input = input("Thank you for choosing Sals Shipping.  What is the weight of your package? ")
 
 print("The best option for you is " + Sal_Shipping(float(user_input)))
-	
-
-	
-	
-	
-	
