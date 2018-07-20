@@ -339,8 +339,7 @@ def cs_service_bot(named):
         return new_customer()
     elif (response == 2):
         return existing_customer()
-    else:
-        return cs_service_bot()   
+    return cs_service_bot()   
 	
     
 name = input("What is your name? ")
