@@ -64,8 +64,7 @@ def Sal_Shipping(weight):
 		return "Drone Shipping at $" + str(drone_total)
 	
 	#Otherwise Ground Shipping is the least expensive
-	else:
-		return "Ground Shipping at $" + str(ground_total)
+	return "Ground Shipping at $" + str(ground_total)
 		
 
 user_input = input("Thank you for choosing Sals Shipping.  What is the weight of your package? ")
