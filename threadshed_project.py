@@ -142,6 +142,8 @@ for daily in daily_transaction_split:
         tmp.append(item.strip())        
         
     transactions_clean.append(tmp)
+
+print(transactions_clean)
      
 
 customers = []
@@ -158,7 +160,7 @@ total_sales = 0
 for s in sales:
     total_sales += float(s.strip('$'))
 
-print(thread_sold)
+#print(thread_sold)
 
 thread_sold_split = []
 
@@ -171,7 +173,7 @@ for t in thread_sold:
         for s in temp:
             thread_sold_split.append(s)
 
-print(thread_sold_split)
+#print(thread_sold_split)
 
 def color_count(color):
     i = 0
@@ -181,7 +183,7 @@ def color_count(color):
 
     return i
 
-print(color_count('white'))
+#print(color_count('white'))
 
 colors = ['red','yellow','green','white','black','blue','purple']
 
@@ -190,7 +192,3 @@ print(
 were sold today""".format(color_count('red'),color_count('yellow'),color_count('green'), \
                           color_count('white'),color_count('black'),color_count('blue'), \
                           color_count('purple')))
-      
-
-
-

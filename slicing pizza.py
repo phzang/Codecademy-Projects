@@ -22,8 +22,3 @@ priciest_pizza = pizzas[-1]
 three_cheapest = pizzas[0:3]
 
 #print(three_cheapest)
-
-
-
-
-
