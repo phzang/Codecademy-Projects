@@ -24,10 +24,10 @@ dates = []
 
 print(highlighted_poems_details[0])
 
-for index in range(0,len(highlighted_poems_details)):
-  titles.append(highlighted_poems_details[index][0])
-  poets.append(highlighted_poems_details[index][1])
-  dates.append(highlighted_poems_details[index][2])
+for title, poet, date in highlighted_poems_details:
+  titles.append(title)
+  poets.append(poet)
+  dates.append(date)
 
 for index in range(0,len(highlighted_poems_details)):
   print("The poem {TITLE} was published by {POET} in {DATE}".format(TITLE=titles[index], POET=poets[index], DATE=dates[index]))
