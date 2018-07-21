@@ -143,8 +143,7 @@ begins with that letter."""
 # Write your count_first_letter function here:
 def count_first_letter(names):
     letters = {}
-    tmp_count = 0
-  
+      
     for key in names.keys():
         if key[0] not in letters:
             letters[key[0]] = len(names[key])
