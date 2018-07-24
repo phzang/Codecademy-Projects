@@ -29,7 +29,8 @@ def add_gamer(gamer, gamers_list):
         gamers_list.append(gamer)
     
 
-kiberly = add_gamer({'name':'Kimberly Warner', 'availablility': ["Monday", "Tuesday", "Friday"]}, gamers)
+kiberly = {'name':'Kimberly Warner', 'availablility': ["Monday", "Tuesday", "Friday"]}
+add_gamer(kiberly, gamers)
 
 add_gamer({'name':'Thomas Nelson','availability': ["Tuesday", "Thursday", "Saturday"]}, gamers)
 add_gamer({'name':'Joyce Sellers','availability': ["Monday", "Wednesday", "Friday", "Saturday"]}, gamers)
@@ -69,6 +70,3 @@ print(game_night)
 
 def available_on_night(gamers_list, day):
     name_list = []
-    pass
-
-
