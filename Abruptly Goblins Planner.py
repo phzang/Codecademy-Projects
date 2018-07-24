@@ -74,9 +74,24 @@ def available_on_night(gamers_list, day):
         days = gamer['availability']
         for gamer_day in days:
             if gamer_day == day:
-                name_list.append(gamer)
+                name_list.append(gamer['name'])
     return name_list
 
 attending_game_night = available_on_night(gamers, game_night)
 print(attending_game_night)
-                
+
+form_email = """
+Dear {name},
+
+The Sorcery Society is happy to host "{game}" night and wishes you will attend. Come by on {day_of_week} and have a blast!
+
+Magically Yours,
+the Sorcery Society
+"""
+
+def send_email(gamers_who_can_attend, day, game):
+    for gamer in gamers_who_can_attend:
+        print(form_email.format(name=gamer['name'], day_of_week=day, game=game))
+        
+send_email(attending_game_night, game_night, "Abruptly Goblins!")
+
