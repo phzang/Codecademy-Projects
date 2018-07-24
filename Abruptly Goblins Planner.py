@@ -70,3 +70,13 @@ print(game_night)
 
 def available_on_night(gamers_list, day):
     name_list = []
+    for gamer in gamers_list:
+        days = gamer['availability']
+        for gamer_day in days:
+            if gamer_day == day:
+                name_list.append(gamer)
+    return name_list
+
+attending_game_night = available_on_night(gamers, game_night)
+print(attending_game_night)
+                
