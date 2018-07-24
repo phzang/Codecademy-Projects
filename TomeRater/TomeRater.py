@@ -19,7 +19,7 @@ class User(object):
         total_rating = 0
         for rating in self.books.values():
             total_rating += rating
-        if len(self.books):    
+        if self.books:    
             return total_rating / len(self.books)
         return 0       
 
@@ -49,7 +49,7 @@ class Book(object):
         total_rating = 0
         for r in self.ratings:
             r += total_rating
-        if len(self.ratings):
+        if self.ratings:
             return total_rating / len(self.ratings)
         return 0
 
