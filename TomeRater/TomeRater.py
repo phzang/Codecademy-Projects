@@ -12,6 +12,12 @@ class User(object):
         print("User {name}'s email has been updated to {email}".format( \
             name = self.name, email = self.email))
 
+    def read_book(self, book, rating=None):
+        self.books[book] = rating
+
+    def get_average_rating(self):
+        pass
+
     def __repr__(self):
         return "User {user}, email: {email}, books read: {books_read}".format( \
             user = self.name, email = self.email, books_read = len(self.books))
@@ -47,13 +53,30 @@ class Book(object):
 
 class Fiction(Book):
     def __init__(self, title, author, isbn):
-        super().__init__(self, title, isbn)
+        super().__init__(title, isbn)
         self.author = author
 
     def get_author(self):
         return self.author
 
-    def __repr(self):
+    def __repr__(self):
         return "{title} by {author}".format( \
             title = self.title,
             author = self.author)
+
+class NonFiction(Book):
+    def __init__(self, title, subject, level, isbn):
+        super().__init__(title, isbn)
+        self.subject = subject #string
+        self.level = level #string
+
+    def get_subject(self):
+        return self.subject
+
+    def get_level(self):
+        return self.level
+
+    def __repr__(self):
+        return "{title}, a {level} manual on {subject}".format( \
+            title = self.title, level = self.level, subject = self.subject)
+

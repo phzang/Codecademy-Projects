@@ -32,3 +32,12 @@ print("=============================")
 fict1 = TR.Fiction("Random Fiction", "Murdoc", "123145")
 print(fict1)
 print(fict1.get_author())
+
+print("===============================")
+non1 = TR.NonFiction("Random NonFiction", "bob", "intermediate","23434")
+print(non1.get_subject())
+print(non1.get_level())
+print(non1)
+
+
+
