@@ -94,4 +94,3 @@ def send_email(gamers_who_can_attend, day, game):
         print(form_email.format(name=gamer['name'], day_of_week=day, game=game))
         
 send_email(attending_game_night, game_night, "Abruptly Goblins!")
-
