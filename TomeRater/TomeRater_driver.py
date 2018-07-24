@@ -14,6 +14,8 @@ q = TR.User("Joe", "nomail")
 
 print(q==b)
 
+print("average rating " + str(q.get_average_rating()))
+
 print("==============================")
 
 book1 = TR.Book("Return of King", "2342523")
