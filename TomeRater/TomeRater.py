@@ -9,14 +9,15 @@ class User(object):
 
     def change_email(self, address):
         self.email = address
-        print("User {name} email has been updated to {email}".format( \
+        print("User {name}'s email has been updated to {email}".format( \
             name = self.name, email = self.email))
 
     def __repr__(self):
-        pass
+        return "User {user}, email: {email}, books read: {books_read}".format( \
+            user = self.name, email = self.email, books_read = len(self.books))
 
     def __eq__(self, other_user):
-        pass
+        return (self.name == other_user.name) and (self.email == other_user.email)
 
 class Book(object):
     def __init__(self, title, isbn):
@@ -41,13 +42,18 @@ class Book(object):
             self.ratings.append(rating)
         print("Invalid Rating")
 
+    def __eq__(self, other_user):
+        return (self.title == other_user.title) and (self.isbn == other_user.isbn)
+
 class Fiction(Book):
     def __init__(self, title, author, isbn):
-        super.__init__(title, isbn)
+        super().__init__(self, title, isbn)
         self.author = author
 
-    def get_author(author):
+    def get_author(self):
         return self.author
 
     def __repr(self):
-        pass
+        return "{title} by {author}".format( \
+            title = self.title,
+            author = self.author)
