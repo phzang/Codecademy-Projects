@@ -30,7 +30,7 @@ class Book(object):
     def get_isbn(self):
         return self.isbn
 
-    def set_isbn(new_isbn):
+    def set_isbn(self, new_isbn):
         self.isbn = new_isbn
         print("{title} ISBN has been updated to {isbn}.".format( \
             title = self.title,
