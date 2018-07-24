@@ -22,7 +22,7 @@ class Book(object):
     def __init__(self, title, isbn):
         self.title = title
         self.isbn = isbn
-        self.ratings = []
+        self.ratings = [] 
 
     def get_title(self):
         return self.title
@@ -35,3 +35,19 @@ class Book(object):
         print("{title} ISBN has been updated to {isbn}.".format( \
             title = self.title,
             isbn = self.isbn))
+
+    def add_rating(self, rating):
+        if rating >= 0 and rating <= 4:
+            self.ratings.append(rating)
+        print("Invalid Rating")
+
+class Fiction(Book):
+    def __init__(self, title, author, isbn):
+        super.__init__(title, isbn)
+        self.author = author
+
+    def get_author(author):
+        return self.author
+
+    def __repr(self):
+        pass
