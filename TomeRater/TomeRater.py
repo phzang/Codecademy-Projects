@@ -79,4 +79,3 @@ class NonFiction(Book):
     def __repr__(self):
         return "{title}, a {level} manual on {subject}".format( \
             title = self.title, level = self.level, subject = self.subject)
-

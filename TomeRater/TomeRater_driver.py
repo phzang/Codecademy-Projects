@@ -38,6 +38,3 @@ non1 = TR.NonFiction("Random NonFiction", "bob", "intermediate","23434")
 print(non1.get_subject())
 print(non1.get_level())
 print(non1)
-
-
-
