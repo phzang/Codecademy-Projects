@@ -81,7 +81,7 @@ class Fiction(Book):
             title = self.title,
             author = self.author)
 
-class NonFiction(Book):
+class Non_Fiction(Book):
     def __init__(self, title, subject, level, isbn):
         super().__init__(title, isbn)
         self.subject = subject #string
@@ -99,8 +99,8 @@ class NonFiction(Book):
 
 class TomeRater(object):
     def __init__(self):
-        self.users = {}
-        self.books = {}
+        self.users = {} #email : User(object)
+        self.books = {} #Book(object) : number of Users that have read it
 
     def create_book(self, title, isbn):
         return Book(title, isbn)
@@ -111,16 +111,35 @@ class TomeRater(object):
     def create_non_fiction(self, title, subject, level, isbn):
         return Non_Fiction(title, subject, level, isbn)
 
-    """def add_book_to_user(self, book, email, rating=None):
-        if self.users.key == email:
-            self.users.read_book(book, rating)
-            book.add_rating(rating)
-	    if 'boo' in book:            
-		self.books[boo] += 1
-	    else:
-		self.books[boo] = 1
+    #DOES NOT WORK YET
+    def add_book_to_user(self, book, email, rating=None):
+        if email in self.users:
+            self.users[email].read_book(book, rating)
+            #self.books[book].add_rating(rating)
+        else:
+            print("No user with email {email}!".format(email=email))
 				
-	def add_user(self, name, email, books=None):	
-	    tmp_usr = User(name,email)
-	    if books:
-                add_book_to_user(book,email)"""
+    def add_user(self, name, email, books=None):
+        self.users[email] = User(name,email)
+        if books:
+            for b in books:
+                add_book_to_user(b,email)
+
+    def print_catalog(self):
+        print("print_catalog()")
+        for book in self.books:            
+            print(book.get_title())
+
+    def print_users(self):
+        print("print_users()")
+        for user in self.users.values():
+            print(user)
+
+    def get_most_read_book(self):
+        pass
+
+    def highest_rated_book(self):
+        pass
+
+    def most_positive_user(self):
+        pass
