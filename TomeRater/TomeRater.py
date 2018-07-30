@@ -48,7 +48,7 @@ class Book(object):
     def get_average_rating(self):
         total_rating = 0
         for r in self.ratings:
-            r += total_rating
+            total_rating += r
         if self.ratings:
             return total_rating / len(self.ratings)
         return 0
@@ -62,7 +62,8 @@ class Book(object):
     def add_rating(self, rating):
         if rating >= 0 and rating <= 4:
             self.ratings.append(rating)
-        print("Invalid Rating")    
+        else:
+            print("Invalid Rating")    
 
     def __eq__(self, other_user):
         return (self.title == other_user.title) and (self.isbn == other_user.isbn)
@@ -110,10 +111,16 @@ class TomeRater(object):
     def create_non_fiction(self, title, subject, level, isbn):
         return Non_Fiction(title, subject, level, isbn)
 
-    def add_book_to_user(self, book, email, rating=None):
+    """def add_book_to_user(self, book, email, rating=None):
         if self.users.key == email:
             self.users.read_book(book, rating)
             book.add_rating(rating)
-        
-
-    
+	    if 'boo' in book:            
+		self.books[boo] += 1
+	    else:
+		self.books[boo] = 1
+				
+	def add_user(self, name, email, books=None):	
+	    tmp_usr = User(name,email)
+	    if books:
+                add_book_to_user(book,email)"""

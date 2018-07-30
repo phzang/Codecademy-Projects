@@ -48,3 +48,16 @@ if ratings:
 else:
     print("nope")
 print(ratings)
+
+print("===========================")
+print("Book TEST")
+book12 = TR.Book("Hunt for Red October", "ASDF@#$#@$)(@$")
+book54 = TR.Book("Lord of the Flies", "908SDFSD")
+print(book12.get_average_rating())
+book12.add_rating(12) #should print "Invalid Rating"
+book12.add_rating(3)
+print(book12.get_average_rating())
+book12.add_rating(1.72)
+print(book12.get_average_rating())
+
+
