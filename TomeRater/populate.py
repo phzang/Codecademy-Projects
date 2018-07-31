@@ -12,11 +12,13 @@ novel2 = Tome_Rater.create_novel("The Diamond Age", "Neal Stephenson", 10101010)
 novel3 = Tome_Rater.create_novel("There Will Come Soft Rains", "Ray Bradbury", 10001000)
 
 #Create users:
-#Tome_Rater.add_user("Alan Turing", "alan@turing.com")
-#Tome_Rater.add_user("David Marr", "david@computation.org")
+Tome_Rater.add_user("Alan Turing", "alan@turing.com")
+Tome_Rater.add_user("David Marr", "david@computation.org")
+
 
 #Add a user with three books already read:
 #Tome_Rater.add_user("Marvin Minsky", "marvin@mit.edu", user_books=[book1, novel1, nonfiction1])
+Tome_Rater.add_user("Marvin Minsky", "marvin@mit.edu", [book1, novel1, nonfiction1])
 
 #Add books to a user one by one, with ratings:
 Tome_Rater.add_book_to_user(book1, "alan@turing.com", 1)

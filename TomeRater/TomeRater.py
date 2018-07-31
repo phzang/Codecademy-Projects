@@ -60,7 +60,7 @@ class Book(object):
             isbn = self.isbn))
 
     def add_rating(self, rating):
-        if rating >= 0 and rating <= 4:
+        if rating != None and rating >= 0 and rating <= 4:
             self.ratings.append(rating)
         else:
             print("Invalid Rating")    
@@ -110,20 +110,24 @@ class TomeRater(object):
 
     def create_non_fiction(self, title, subject, level, isbn):
         return Non_Fiction(title, subject, level, isbn)
-
-    #DOES NOT WORK YET
-    def add_book_to_user(self, book, email, rating=None):
+    
+    def add_book_to_user(self, book, email, rating=None):        
         if email in self.users:
             self.users[email].read_book(book, rating)
-            #self.books[book].add_rating(rating)
+            book.add_rating(rating)
+            if book in self.books:
+                self.books[book] += 1
+            else:
+                self.books[book] = 1
         else:
             print("No user with email {email}!".format(email=email))
-				
+
+    #needs work			
     def add_user(self, name, email, books=None):
         self.users[email] = User(name,email)
         if books:
             for b in books:
-                add_book_to_user(b,email)
+                self.add_book_to_user(b,email)
 
     def print_catalog(self):
         print("print_catalog()")
@@ -136,10 +140,23 @@ class TomeRater(object):
             print(user)
 
     def get_most_read_book(self):
-        pass
+        print(max(self.books,key=self.books.get))
 
     def highest_rated_book(self):
-        pass
-
+        tmp_book = Book("","")
+        high_rating = 0
+        for book in self.books:            
+            if book.get_average_rating() >= high_rating:
+                tmp_book = book
+                high_rating = book.get_average_rating()
+        return tmp_book
+    
+    #needs work
     def most_positive_user(self):
-        pass
+        tmp_user = User("","")
+        high_rating = 0
+        for user in self.users.values():
+            if user.get_average_rating() >= high_rating:
+                tmp_user = user
+                high_rating = user.get_average_rating()
+        return tmp_user
