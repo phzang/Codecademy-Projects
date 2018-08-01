@@ -17,10 +17,13 @@ class User(object):
 
     def get_average_rating(self):
         total_rating = 0
+        books_with_ratings = 0
         for rating in self.books.values():
-            total_rating += rating
-        if self.books:    
-            return total_rating / len(self.books)
+            if rating != None:
+                total_rating += rating
+                books_with_ratings += 1
+        if books_with_ratings:    
+            return total_rating / books_with_ratings
         return 0       
 
     def __repr__(self):
@@ -68,6 +71,11 @@ class Book(object):
     def __eq__(self, other_user):
         return (self.title == other_user.title) and (self.isbn == other_user.isbn)
 
+    def __repr__(self):
+        return "{title}, {isbn}".format( \
+            title = self.title,
+            isbn = self.isbn)
+    
 class Fiction(Book):
     def __init__(self, title, author, isbn):
         super().__init__(title, isbn)
@@ -121,12 +129,11 @@ class TomeRater(object):
                 self.books[book] = 1
         else:
             print("No user with email {email}!".format(email=email))
-
-    #needs work			
-    def add_user(self, name, email, books=None):
+   			
+    def add_user(self, name, email, user_books=None):
         self.users[email] = User(name,email)
-        if books:
-            for b in books:
+        if user_books:
+            for b in user_books:
                 self.add_book_to_user(b,email)
 
     def print_catalog(self):
@@ -151,7 +158,6 @@ class TomeRater(object):
                 high_rating = book.get_average_rating()
         return tmp_book
     
-    #needs work
     def most_positive_user(self):
         tmp_user = User("","")
         high_rating = 0
