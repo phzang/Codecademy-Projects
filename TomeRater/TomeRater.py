@@ -2,7 +2,7 @@ class User(object):
     def __init__(self, name, email):
         self.name = name
         self.email = email
-        self.books = {} #key:book, value: rating
+        self.books = {} #Book(object) : rating
 
     def get_email(self):
         return self.email
@@ -60,10 +60,13 @@ class Book(object):
 
     def get_average_rating(self):
         total_rating = 0
-        for r in self.ratings:
-            total_rating += r
-        if self.ratings:
-            return total_rating / len(self.ratings)
+        valid_ratings = 0
+        for r in self.ratings: 
+            if r != None:
+                total_rating += r
+                valid_ratings += 1
+        if valid_ratings:
+            return total_rating / valid_ratings
         return 0
 
     def set_isbn(self, new_isbn):
@@ -82,7 +85,8 @@ class Book(object):
             print("Please enter a valid price.")
 
     def add_rating(self, rating):
-        if rating != None and rating >= 0 and rating <= 4:
+        #rating == None prevents TypeError >= 'NoneType' and 'int'
+        if  (rating == None) or (rating >= 0 and rating <= 4):
             self.ratings.append(rating)
         else:
             print("Invalid Rating")
@@ -182,17 +186,15 @@ class TomeRater(object):
             return False
 
     def print_catalog(self):
-        print("print_catalog()")
         for book in self.books:
             print(book.get_title())
 
     def print_users(self):
-        print("print_users()")
         for user in self.users.values():
             print(user)
 
     def get_most_read_book(self):
-        print(max(self.books,key=self.books.get))
+        return (max(self.books,key=self.books.get))
 
     def get_worth_of_user(self, user_email):
         total = 0
@@ -223,15 +225,8 @@ class TomeRater(object):
     def valid_email(self, email):
         try:
             if email.find("@"):
-                email_split = email.split('@')
-                print("email_split: {}".format(email_split))
-                print("email_split[1]: {}".format(email_split[1]))
-                print("email_split[1].find(edu) {}".format(email_split[1].find(".edu")))
-                print("email_split[1].find(com) {}".format(email_split[1].find(".com")))
-                print("email_split[1].find(org) {}".format(email_split[1].find(".org")))
-                        
+                email_split = email.split('@')                    
                 email_dot_split = str(email_split[1]).split('.')
-                print(email_dot_split)
             
                 if (email_dot_split[1] == "com") or  \
                     (email_dot_split[1] == "edu") or  \
@@ -252,25 +247,11 @@ class TomeRater(object):
             tmp.append(sorted_books[b])
         return tmp
 
-    """def get_n_most_prolific_readers(self, n):
-        readerss = {}
-        for key, user in self.users.items():
-            readerss[user] = user.get_number_of_books()
-
-        sorted_readers = sorted(readerss, key=self.readerss.get, reverse=True)
-        #prevent Index out of range error
-        if n > len(sorted_readers):
-            n = len(sorted_readers)
-        tmp = []
-        for b in range(0,n):
-            tmp.append(sorted_readers[b])
-        return tmp"""
-
     def get_n_most_expensive_books(self, n):
         tester = {}
         for book in self.books:
             tester[book] = book.get_price()
-
+            
         sorted_readers = sorted(tester, key=tester.get, reverse=True)
         #prevent Index out of range error
         if n > len(sorted_readers):
@@ -288,4 +269,8 @@ class TomeRater(object):
                 total += book.get_price()
         return "Tome Rater has {users} users, {books} books, worth ${total}".format( \
                 users = len(self.users), books = len(self.books), total = total)
-        
+                 
+    def __eq__(self, other):
+        return ((self.users == other.users) and \
+                (self.books == other.books) and \
+                (self.library == other.library))    
