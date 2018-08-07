@@ -86,7 +86,7 @@ class Book(object):
 
     def add_rating(self, rating):
         #rating == None prevents TypeError >= 'NoneType' and 'int'
-        if  (rating == None) or (rating >= 0 and rating <= 4):
+        if  (rating is None) or (rating >= 0 and rating <= 4):
             self.ratings.append(rating)
         else:
             print("Invalid Rating")
