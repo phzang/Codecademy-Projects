@@ -15,10 +15,8 @@ novel3 = Tome_Rater.create_novel("There Will Come Soft Rains", "Ray Bradbury", 1
 Tome_Rater.add_user("Alan Turing", "alan@turing.com")
 Tome_Rater.add_user("David Marr", "david@computation.org")
 
-
 #Add a user with three books already read:
-#Tome_Rater.add_user("Marvin Minsky", "marvin@mit.edu", user_books=[book1, novel1, nonfiction1])
-Tome_Rater.add_user("Marvin Minsky", "marvin@mit.edu", books=[book1, novel1, nonfiction1])
+Tome_Rater.add_user("Marvin Minsky", "marvin@mit.edu", user_books=[book1, novel1, nonfiction1])
 
 #Add books to a user one by one, with ratings:
 Tome_Rater.add_book_to_user(book1, "alan@turing.com", 1)
@@ -42,3 +40,12 @@ print("Highest rated book:")
 print(Tome_Rater.highest_rated_book())
 print("Most read book:")
 print(Tome_Rater.get_most_read_book())
+print("print_catalog():")
+Tome_Rater.print_catalog()
+print("print_users():")
+Tome_Rater.print_users()
+print("Tome Rater printed:")
+print(Tome_Rater)
+print("get_n_most_read_books")
+print(Tome_Rater.get_n_most_read_books(3))
+print(Tome_Rater.get_worth_of_user("marvin@mit.edu"))
