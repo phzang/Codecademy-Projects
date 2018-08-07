@@ -238,4 +238,3 @@ class TomeRater(object):
         for b in range(0,n):
             tmp.append(sorted_readers[b])
         return tmp"""
-
