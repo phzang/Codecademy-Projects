@@ -37,7 +37,7 @@ class User(object):
         return (self.name == other_user.name) and (self.email == other_user.email)
 
     def __hash__(self):
-        return hash(repr(self))
+        return hash((self.name, self.email))
 
 class Book(object):
     def __init__(self, title, isbn, price = None):
@@ -167,14 +167,19 @@ class TomeRater(object):
             print("No user with email {email}!".format(email=email))
 
     def add_user(self, name, email, user_books=None):
-        if email in self.users:
-            print("User with email {email} already exists!".format( \
+        if self.valid_email(email):
+            if email in self.users:
+                print("User with email {email} already exists!".format( \
                                                     email = email))
+            else:
+                self.users[email] = User(name,email)
+                if user_books:
+                    for b in user_books:
+                        self.add_book_to_user(b,email)
+            return True
         else:
-            self.users[email] = User(name,email)
-            if user_books:
-                for b in user_books:
-                    self.add_book_to_user(b,email)
+            print("Please enter a valid email")
+            return False
 
     def print_catalog(self):
         print("print_catalog()")
@@ -214,6 +219,28 @@ class TomeRater(object):
                 tmp_user = user
                 high_rating = user.get_average_rating()
         return tmp_user
+        
+    def valid_email(self, email):
+        try:
+            if email.find("@"):
+                email_split = email.split('@')
+                print("email_split: {}".format(email_split))
+                print("email_split[1]: {}".format(email_split[1]))
+                print("email_split[1].find(edu) {}".format(email_split[1].find(".edu")))
+                print("email_split[1].find(com) {}".format(email_split[1].find(".com")))
+                print("email_split[1].find(org) {}".format(email_split[1].find(".org")))
+                        
+                email_dot_split = str(email_split[1]).split('.')
+                print(email_dot_split)
+            
+                if (email_dot_split[1] == "com") or  \
+                    (email_dot_split[1] == "edu") or  \
+                    (email_dot_split[1]) == "org":
+                    return True
+        
+        except IndexError:
+            return False
+        return False
 
     def get_n_most_read_books(self, n):
         sorted_books = sorted(self.books, key=self.books.get, reverse=True)
@@ -238,3 +265,27 @@ class TomeRater(object):
         for b in range(0,n):
             tmp.append(sorted_readers[b])
         return tmp"""
+
+    def get_n_most_expensive_books(self, n):
+        tester = {}
+        for book in self.books:
+            tester[book] = book.get_price()
+
+        sorted_readers = sorted(tester, key=tester.get, reverse=True)
+        #prevent Index out of range error
+        if n > len(sorted_readers):
+            n = len(sorted_readers)
+
+        tmp = []
+        for b in range(0,n):
+            tmp.append(sorted_readers[b])
+        return tmp
+        
+    def __repr__(self):
+        total = 0
+        for book in self.books:
+            if book.get_price() != None:            
+                total += book.get_price()
+        return "Tome Rater has {users} users, {books} books, worth ${total}".format( \
+                users = len(self.users), books = len(self.books), total = total)
+        
