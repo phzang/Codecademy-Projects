@@ -1,21 +1,25 @@
-class User(object):
-    def __init__(self, name, email):
-        self.name = name
-        self.email = email
-        self.books = {}  # Book(object) : rating
+from typing import Dict
+from typing import List
 
-    def get_email(self):
+
+class User(object):
+    def __init__(self, name: str, email: str) -> None:
+        self.name: str = name
+        self.email: str = email
+        self.books: Dict = {}  # Book(object) : rating
+
+    def get_email(self) -> str:
         return self.email
 
-    def change_email(self, address):
+    def change_email(self, address: str) -> None:
         self.email = address
         print("User {name}'s email has been updated to {email}".format(
             name=self.name, email=self.email))
 
-    def read_book(self, book, rating=None):
+    def read_book(self, book, rating=None) -> None:
         self.books[book] = rating
 
-    def get_average_rating(self):
+    def get_average_rating(self) -> float:
         total_rating = 0
         books_with_ratings = 0
         for rating in self.books.values():
@@ -26,7 +30,7 @@ class User(object):
             return total_rating / books_with_ratings
         return 0
 
-    def get_number_of_books(self):
+    def get_number_of_books(self) -> int:
         return len(self.books)
 
     def __repr__(self):
@@ -41,28 +45,28 @@ class User(object):
 
 
 class Book(object):
-    def __init__(self, title, isbn, price = None):
-        self.title = title
-        self.isbn = isbn
-        self.ratings = []
-        self.price = None
+    def __init__(self, title: str, isbn: int, price: float = None) -> None:
+        self.title: str = title
+        self.isbn: int = isbn
+        self.ratings: List = []
+        self.price: float = 0
 
     def __hash__(self):
         return hash((self.title, self.isbn))
 
-    def get_title(self):
+    def get_title(self) -> str:
         return self.title
 
-    def get_isbn(self):
+    def get_isbn(self) -> int:
         return self.isbn
 
-    def get_price(self):
+    def get_price(self) -> float:
         return self.price
 
-    def get_average_rating(self):
-        total_rating = 0
-        valid_ratings = 0
-        for r in self.ratings: 
+    def get_average_rating(self) -> float:
+        total_rating: int = 0
+        valid_ratings: int = 0
+        for r in self.ratings:
             if r is not None:
                 total_rating += r
                 valid_ratings += 1
@@ -70,13 +74,13 @@ class Book(object):
             return total_rating / valid_ratings
         return 0
 
-    def set_isbn(self, new_isbn):
-        self.isbn = new_isbn
+    def set_isbn(self, new_isbn) -> None:
+        self.isbn: int = new_isbn
         print("{title} ISBN has been updated to {isbn}.".format(
             title=self.title,
             isbn=self.isbn))
 
-    def set_price(self, new_price):
+    def set_price(self, new_price: float) -> None:
         if new_price >= 0:
             self.price = new_price
             print("{title} price has been updated to {price}.".format(
@@ -85,7 +89,7 @@ class Book(object):
         else:
             print("Please enter a valid price.")
 
-    def add_rating(self, rating):
+    def add_rating(self, rating: float) -> None:
         # rating == None prevents TypeError >= 'NoneType' and 'int'
         if (rating is None) or (0 <= rating <= 4):
             self.ratings.append(rating)
@@ -101,11 +105,11 @@ class Book(object):
 
 
 class Fiction(Book):
-    def __init__(self, title, author, isbn):
+    def __init__(self, title: str, author: str, isbn: int) -> None:
         super().__init__(title, isbn)
         self.author = author
 
-    def get_author(self):
+    def get_author(self) -> str:
         return self.author
 
     def __repr__(self):
@@ -115,15 +119,15 @@ class Fiction(Book):
 
 
 class Non_Fiction(Book):
-    def __init__(self, title, subject, level, isbn):
+    def __init__(self, title: str, subject: str, level: str, isbn: int) -> None:
         super().__init__(title, isbn)
-        self.subject = subject  # string
-        self.level = level  # string
+        self.subject: str = subject
+        self.level: str = level
 
-    def get_subject(self):
+    def get_subject(self) -> str:
         return self.subject
 
-    def get_level(self):
+    def get_level(self) -> str:
         return self.level
 
     def __repr__(self):
@@ -133,37 +137,37 @@ class Non_Fiction(Book):
 
 class TomeRater(object):
     def __init__(self):
-        self.users = {}  # email : User(object)
-        self.books = {}  # Book(object) : number of Users that have read it
-        self.library = {}  # ISBN : Book(objects) that were created
+        self.users: Dict = {}  # email : User(object)
+        self.books: Dict = {}  # Book(object) : number of Users that have read it
+        self.library: Dict = {}  # ISBN : Book(objects) that were created
 
-    def isbn_exists(self, isbn):
+    def isbn_exists(self, isbn: int) -> int:
         if isbn in self.library:
             return True
         return False
 
-    def create_book(self, title, isbn):
+    def create_book(self, title: str, isbn: int):
         if self.isbn_exists(isbn):
             print("ISBN #{isbn} already exists!".format(isbn=isbn))
             return False
         self.library[isbn] = Book(title, isbn)
         return Book(title, isbn)
 
-    def create_novel(self, title, author, isbn):
+    def create_novel(self, title: str, author: str, isbn: int):
         if self.isbn_exists(isbn):
             print("ISBN #{isbn} already exists!".format(isbn=isbn))
             return False
         self.library[isbn] = Fiction(title, author, isbn)
         return Fiction(title, author, isbn)
 
-    def create_non_fiction(self, title, subject, level, isbn):
+    def create_non_fiction(self, title: str, subject: str, level: str, isbn: int):
         if self.isbn_exists(isbn):
             print("ISBN #{isbn} already exists!".format(isbn=isbn))
             return False
         self.library[isbn] = Non_Fiction(title, subject, level, isbn)
         return Non_Fiction(title, subject, level, isbn)
 
-    def add_book_to_user(self, book, email, rating=None):
+    def add_book_to_user(self, book, email: str, rating=None) -> None:
         if email in self.users:
             self.users[email].read_book(book, rating)
             book.add_rating(rating)
@@ -174,7 +178,7 @@ class TomeRater(object):
         else:
             print("No user with email {email}!".format(email=email))
 
-    def add_user(self, name, email, user_books=None):
+    def add_user(self, name, email, user_books=None) -> int:
         if self.valid_email(email):
             if email in self.users:
                 print("User with email {email} already exists!".format(
@@ -189,18 +193,18 @@ class TomeRater(object):
             print("Please enter a valid email")
             return False
 
-    def print_catalog(self):
+    def print_catalog(self) -> None:
         for book in self.books:
             print(book.get_title())
 
-    def print_users(self):
+    def print_users(self) -> None:
         for user in self.users.values():
             print(user)
 
-    def get_most_read_book(self):
+    def get_most_read_book(self) -> int:
         return max(self.books, key=self.books.get)
 
-    def get_worth_of_user(self, user_email):
+    def get_worth_of_user(self, user_email) -> float:
         total = 0
         if user_email in self.users:
             for book in self.users[user_email].books:
@@ -225,8 +229,9 @@ class TomeRater(object):
                 tmp_user = user
                 high_rating = user.get_average_rating()
         return tmp_user
-        
-    def valid_email(self, email):
+
+    @staticmethod
+    def valid_email(email) -> int:
         try:
             if email.find("@"):
                 email_split = email.split('@')                    
