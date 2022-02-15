@@ -1,2 +1,2 @@
 # Codecademy-Projects
-# Place to store projects from Codecademy.com
+# Really old place to store projects from Codecademy.com
